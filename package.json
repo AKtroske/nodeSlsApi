@@ -1,0 +1,26 @@
+{
+  "name": "nodeslsapi",
+  "version": "1.0.0",
+  "description": "Learning to use serverless with NodeJS and AWS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AKtroske/NodeSLSapi.git"
+  },
+  "author": "Akahi Troske",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AKtroske/NodeSLSapi/issues"
+  },
+  "homepage": "https://github.com/AKtroske/NodeSLSapi#readme",
+  "dependencies": {
+    "@vendia/serverless-express": "^3.4.0",
+    "aws-serverless-express": "^3.4.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
