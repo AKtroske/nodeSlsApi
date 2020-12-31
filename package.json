@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AKtroske/NodeSLSapi.git"
+    "url": "git+https://github.com/AKtroske/nodeSlsApi.git"
   },
   "author": "Akahi Troske",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AKtroske/NodeSLSapi/issues"
+    "url": "https://github.com/AKtroske/nodeSlsApi/issues"
   },
-  "homepage": "https://github.com/AKtroske/NodeSLSapi#readme",
+  "homepage": "https://github.com/AKtroske/nodeSlsApi#readme",
   "dependencies": {
     "@vendia/serverless-express": "^3.4.0",
     "aws-serverless-express": "^3.4.0",

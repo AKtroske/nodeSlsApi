@@ -57,9 +57,13 @@ provider:
 #    - exclude-me.js
 #    - exclude-me-dir/**
 
+##### Any request sent to our root or /(any) will be handled by our handler
 functions:
-  hello:
-    handler: handler.hello
+  app:
+    handler: handler.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
