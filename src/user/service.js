@@ -2,28 +2,29 @@ const BasicCrud = require('../lib/BasicCrud')
 
 let service = Object.create(BasicCrud)
 
-const create = (req, res) => {
+function create(data) {
   console.log('create in user service');
-  return service.create(req.body);
+  return service.create(data);
 }
 
-const get = (req, res) => {
+function get(uid) {
   console.log('get in user service');
-  return service.create(req.body);
+  return service.get(uid);
 }
-const search = (req, res) => {
+
+function search(criteria) {
   console.log('search in user service');
-  return service.create(req.body);
+  return service.search(criteria);
 }
 
-const update = (req, res) => {
+function update(uid, data) {
   console.log('update in user service');
-  return service.create(req.body);
+  return service.update(uid, data);
 }
 
-const remove = (req, res) => {
+function remove(uid) {
   console.log('delete in user service');
-  return service.create(req.body);
+  return service.remove(uid);
 }
 
 // Implement basicc crud in user servvice

@@ -1,36 +1,45 @@
 /*
   Basic framework for CRUD operations - create, get, search, update, remove
 */
+const { v4:uuidv4 } = require('uuid');
 
-const create = (data, res, ...args) => {
-  console.log('create');
+/*
+  Normally will validate data here and then create a new entry in DB
+  BUT no DB interaction, generate a uid and return
+*/
+function create(data) {
+  console.log('create crud');
   console.log(data);
-  res.send('crud create');
-}
+  uid = uuidv4();
+  return uid;
+};
 
-const get = (data, res, ...args) => {
-  console.log('get');
-  console.log(data);
-  res.send('crud get');
-}
+function get(uid) {
+  console.log('get crud');
+  console.log(uid);
+  data = { mssg : 'You got the data!', uid : uid}
+  return data
+};
 
-const search = (data, res, ...args) => {
-  console.log('search');
-  console.log(data);
-  res.send('crud search');
-}
+function search(criteria) {
+  console.log('search crud');
+  console.log(criteria)
+  data = { mssg : 'You found the data!'}
+  return data
+};
 
-const update = (data, res, ...args) => {
-  console.log('update');
+function update(uid, data) {
+  console.log('update crud');
   console.log(data);
-  res.send('crud update');
-}
+  resp = { mssg : 'You updated the data!', data : data, uid : uid}
+  return resp
+};
 
-const remove = (data, res,...args) => {
-  console.log('delete');
-  console.log(data);
-  res.send('crud remove');
-}
+function remove(uid) {
+  console.log('remove crud')
+  resp = { mssg : 'You removed data!', uid : uid}
+  return resp
+};
 
 // Basic Crud prototype
 const BasicCrud = {
