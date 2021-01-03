@@ -19,8 +19,8 @@ app.use(cors())
 app.use('/api/user', user)
 
 // Fire server on our port
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`)
-})
+// app.listen(port, () => {
+//   console.log(`App running on port ${port}.`)
+// })
 
-// module.exports = app;
+module.exports = app;

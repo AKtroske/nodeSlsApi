@@ -5,9 +5,9 @@
 // API helper
 const {
   isEmpty,
-  errorInvalidInput,
-  errorRes500,
-  successRes
+  InvalidInputError,
+  InternalError,
+  SuccessResp
 } = require('./APIHelper')
 
 /* BasicFront constructor
@@ -15,14 +15,6 @@ const {
   with callbacks involving the request and response object. Need constructor to
   provide this context to ur callbacks
 */
-function BasicFront(crudService){
-  this.crudService = crudService;
-  this.create = create;
-  this.get = get;
-  this.search = search;
-  this.update = update;
-  this.remove = remove;
-};
 
 function create() {
   return (req, res) => {
@@ -31,20 +23,20 @@ function create() {
     data = req.body;
 
     if (isEmpty(data)){
-      errorInvalidInput(res, err, 'Missing data');
+      InvalidInputError(res, err, 'Missing data');
     };
 
     try {
       uid = this.crudService.create(data);
     } catch (err){
-      errorRes500(res, err);
+      InternalError(res, err);
     };
 
     resp = {
       uid : uid
     };
 
-    successRes(res, resp);
+    SuccessResp(res, resp);
   };
 }
 
@@ -55,17 +47,17 @@ function get() {
     const uid = req.params.id;
 
     if (uid == null){
-      errorInvalidInput(res, err, 'Missing UID');
+      InvalidInputError(res, err, 'Missing UID');
     }
 
     // Return
     try {
       data = this.crudService.get(uid)
     } catch (err){
-      errorRes500(res, err)
+      InternalError(res, err)
     }
 
-    successRes(res, data);
+    SuccessResp(res, data);
   };
 }
 
@@ -78,10 +70,10 @@ function search() {
     try {
       data = this.crudService.search(criteria)
     } catch (err){
-      errorRes500(res, err)
+      InternalError(res, err)
     }
 
-    successRes(res, data);
+    SuccessResp(res, data);
   };
 };
 
@@ -91,7 +83,7 @@ function update(req, res) {
 
     const uid = req.params.id;
     if (uid == null){
-      errorInvalidInput(res, err, 'Missing UID');
+      InvalidInputError(res, err, 'Missing UID');
     }
 
     const data = req.body;
@@ -100,10 +92,10 @@ function update(req, res) {
     try {
       resp = this.crudService.update(uid, data)
     } catch (err){
-      errorRes500(res, err)
+      InternalError(res, err)
     }
 
-    successRes(res, resp);
+    SuccessResp(res, resp);
   };
 };
 
@@ -114,18 +106,27 @@ function remove(req, res) {
     const uid = req.params.id;
 
     if (uid == null){
-      errorInvalidInput(res, err, 'Missing UID');
+      InvalidInputError(res, err, 'Missing UID');
     }
 
     // Return
     try {
       data = this.crudService.remove(uid)
     } catch (err){
-      errorRes500(res, err)
+      InternalError(res, err)
     }
 
-    successRes(res, data);
+    SuccessResp(res, data);
   };
+};
+
+function BasicFront(crudService){
+  this.crudService = crudService;
+  this.create = create;
+  this.get = get;
+  this.search = search;
+  this.update = update;
+  this.remove = remove;
 };
 
 module.exports = BasicFront;

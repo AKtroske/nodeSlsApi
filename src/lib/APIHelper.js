@@ -9,17 +9,17 @@ function isEmpty(obj) {
    return true;
 }
 
-function errorInvalidInput (res, err, errMsg='', statusCode=400) {
+function InvalidInputError (res, err, errMsg='', statusCode=400) {
   console.error("ERROR:", err)
   return res.status(statusCode).json({ success: false, error: "Invalid input operation", message: errMsg})
 }
 
-function errorRes500 (res, err, errMsg='') {
+function InternalError (res, err, errMsg='') {
   console.error("ERROR:", err)
   return res.status(500).json({ success: false, error: "Server Error", message: errMsg})
 }
 
-function successRes (res, data, statusCode=200) {
+function SuccessResp (res, data, statusCode=200) {
   // Set reponse to our data and then add success to our response object
   response = data;
   response.success = true;
@@ -28,7 +28,7 @@ function successRes (res, data, statusCode=200) {
 
 module.exports = {
   isEmpty,
-  errorInvalidInput,
-  errorRes500,
-  successRes
+  InvalidInputError,
+  InternalError,
+  SuccessResp
 };
