@@ -1,33 +1,41 @@
-/*
-  Basic front for CRUD operations to handle request and response objects
-*/
-
-// API helper
-const {
-  isEmpty,
-  InvalidInputError,
-  InternalError,
-  SuccessResp
-} = require('./APIHelper')
-
-/* BasicFront constructor
-  Accepts a basic or modified crud service and maps our standard CRUD functions
+/* BasicFront
+  Accepts a crud service and maps our standard CRUD functions
   with callbacks involving the request and response object. Need constructor to
-  provide this context to ur callbacks
+  provide service context to our callbacks
 */
+
+module.exports = function BuildBasicFront({ crudService, APIHelper }){
+  return () => {
+    const service = crudService;
+    const {
+      isEmpty,
+      InvalidInputError,
+      InternalError,
+      SuccessResp
+    } = APIHelper;
+
+    BasicFront = {
+      create : create,
+      get : get,
+      search :search,
+      update : update,
+      remove : remove
+    }
+    return BasicFront
+  }
+};
 
 function create() {
   return (req, res) => {
     console.log('create front');
 
     data = req.body;
-
     if (isEmpty(data)){
       InvalidInputError(res, err, 'Missing data');
     };
 
     try {
-      uid = this.crudService.create(data);
+      uid = service.create(data);
     } catch (err){
       InternalError(res, err);
     };
@@ -45,14 +53,12 @@ function get() {
     console.log('get front');
 
     const uid = req.params.id;
-
     if (uid == null){
       InvalidInputError(res, err, 'Missing UID');
     }
 
-    // Return
     try {
-      data = this.crudService.get(uid)
+      data = service.get(uid)
     } catch (err){
       InternalError(res, err)
     }
@@ -68,7 +74,7 @@ function search() {
     criteria = req.query;
 
     try {
-      data = this.crudService.search(criteria)
+      data = service.search(criteria)
     } catch (err){
       InternalError(res, err)
     }
@@ -77,7 +83,7 @@ function search() {
   };
 };
 
-function update(req, res) {
+function update() {
   return (req, res) => {
     console.log('update front');
 
@@ -87,10 +93,8 @@ function update(req, res) {
     }
 
     const data = req.body;
-    // Verify valid data
-
     try {
-      resp = this.crudService.update(uid, data)
+      resp = service.update(uid, data)
     } catch (err){
       InternalError(res, err)
     }
@@ -99,19 +103,17 @@ function update(req, res) {
   };
 };
 
-function remove(req, res) {
+function remove() {
   return (req, res) => {
     console.log('delete front');
 
     const uid = req.params.id;
-
     if (uid == null){
       InvalidInputError(res, err, 'Missing UID');
     }
 
-    // Return
     try {
-      data = this.crudService.remove(uid)
+      data = service.remove(uid)
     } catch (err){
       InternalError(res, err)
     }
@@ -119,14 +121,3 @@ function remove(req, res) {
     SuccessResp(res, data);
   };
 };
-
-function BasicFront(crudService){
-  this.crudService = crudService;
-  this.create = create;
-  this.get = get;
-  this.search = search;
-  this.update = update;
-  this.remove = remove;
-};
-
-module.exports = BasicFront;

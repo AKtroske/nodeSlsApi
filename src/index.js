@@ -7,7 +7,7 @@ const cors = require('cors')
 const port = process.env.PORT || 8000
 
 //Routes
-const user = require('./user/routes')
+const user = require('./user/UserRoutes')
 
 const app = express()
 
@@ -19,8 +19,8 @@ app.use(cors())
 app.use('/api/user', user)
 
 // Fire server on our port
-// app.listen(port, () => {
-//   console.log(`App running on port ${port}.`)
-// })
+app.listen(port, () => {
+  console.log(`App running on port ${port}.`)
+})
 
 module.exports = app;

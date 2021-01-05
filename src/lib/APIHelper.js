@@ -26,9 +26,13 @@ function SuccessResp (res, data, statusCode=200) {
   return res.status(statusCode).json(response)
 }
 
-module.exports = {
-  isEmpty,
-  InvalidInputError,
-  InternalError,
-  SuccessResp
-};
+function BuildAPIHelper(){
+  return {
+    isEmpty,
+    InvalidInputError,
+    InternalError,
+    SuccessResp
+  }
+}
+
+module.exports = BuildAPIHelper;

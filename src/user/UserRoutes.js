@@ -1,11 +1,10 @@
-const express = require('express');
+const express = require('express')
 const app = require('../index')
-const UserService = require('./service')
-const BasicFront = require('../lib/BasicFront')
+const MakeUserFront = require('./UserFront')
 
-const router = express.Router();
+const router = express.Router()
 
-let UserFront = new BasicFront(UserService);
+const UserFront = MakeUserFront()
 
 router
   .post('/create/', UserFront.create())
