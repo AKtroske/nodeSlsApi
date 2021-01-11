@@ -1,12 +1,13 @@
 // Lib imports
-const BuildBasicFront = require('../lib/BasicFront')
-const BuildAPIHelper = require('../lib/APIHelper')
+const MakeBasicFront = require('../lib/BasicFront')
+const MakeAPIHelper = require('../lib/APIHelper')
 
 // Service imports
-const UserService = require('./UserService')
+const MakeUserService = require('./UserService')
 
-const APIHelper = BuildAPIHelper();
-
-const MakeUserFront = BuildBasicFront({ UserService, APIHelper });
-
-module.exports = MakeUserFront;
+// Create user front
+module.exports = function MakeUserFront(){
+  const apiHelper = MakeAPIHelper()
+  const service = MakeUserService()
+  return MakeBasicFront({ service, apiHelper });
+}
