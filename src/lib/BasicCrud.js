@@ -1,8 +1,7 @@
 /*
   Basic framework for CRUD operations - create, get, search, update, remove
 */
-module.exports = function MakeBasicCrud({ repo }){
-  const { v4:uuidv4 } = require('uuid');
+module.exports = function BuildBasicCrud({ repo }){
   return Object.freeze({
     create,
     get,
@@ -13,8 +12,7 @@ module.exports = function MakeBasicCrud({ repo }){
 
   function create(data) {
     console.log('create crud');
-    console.log(data);
-    uid = uuidv4();
+    repo.create(data);
     return uid;
   };
 

@@ -1,7 +1,7 @@
 /*
   Api helper functions for error handling and value checking
 */
-module.exports = function MakeAPIHelper(){
+module.exports = function BuildAPIHelper(){
   return Object.freeze({
     isEmpty,
     InvalidInputError,

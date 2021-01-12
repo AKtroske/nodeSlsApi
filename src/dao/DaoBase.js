@@ -1,4 +1,4 @@
-module.exports = function MakeDaoBase({pool}) {
+module.exports = function BuildDaoBase({pool}) {
   return Object.freeze({
     create,
     update

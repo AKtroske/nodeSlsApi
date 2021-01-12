@@ -1,10 +1,10 @@
 const express = require('express')
 const app = require('../index')
-const MakeUserFront = require('./UserFront')
+const BuildUserFront = require('./UserFront')
 
 const router = express.Router()
 
-const UserFront = MakeUserFront()
+const UserFront = BuildUserFront()
 
 router
   .post('/create/', UserFront.create())

@@ -5,7 +5,7 @@
   with callbacks involving the request and response object. Need constructor to
   provide service context to our callbacks
 */
-module.exports = function MakeBasicFront({ service, apiHelper }){
+module.exports = function BuildBasicFront({ service, apiHelper }){
   const {
     isEmpty,
     InvalidInputError,

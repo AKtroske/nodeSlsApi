@@ -1,10 +1,10 @@
-const MakeBasicCrud = require('../lib/BasicCrud')
-const MakeUserRepo = require('./UserRepo')
+const BuildBasicCrud = require('../lib/BasicCrud')
+const BuildUserRepo = require('./UserRepo')
 
-let repo = MakeUserRepo()
-let service = MakeBasicCrud({ repo })
+let repo = BuildUserRepo()
+let service = BuildBasicCrud({ repo })
 
-module.exports = function MakeUserService(){
+module.exports = function BuildUserService(){
   return Object.freeze({
     create,
     get,
