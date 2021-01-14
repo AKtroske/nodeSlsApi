@@ -9,6 +9,15 @@ const pool = new Pool({
   port: 5432,
 })
 
+// ENV NOT WORKING
+// const pool = new Pool({
+//   user: 'akahi',
+//   host: 'localhost',
+//   database: 'node_api',
+//   password: 'CHANGE HERE',
+//   port: 5432,
+// })
+
 
 pool.on('error', (err, client) => {
   console.error('Unexpected error on idle client', err)

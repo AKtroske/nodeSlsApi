@@ -21,25 +21,26 @@ module.exports = function BuildBasicFront({ service, apiHelper }){
   })
   function create() {
     return (req, res) => {
-      console.log('create front');
+      console.log('create front')
 
-      data = req.body;
+      data = req.body
       if (isEmpty(data)){
-        InvalidInputError(res, err, 'Missing data');
-      };
+        InvalidInputError(res, err, 'Missing data')
+      }
 
-      try {
-        uid = service.create(data);
-      } catch (err){
-        InternalError(res, err);
-      };
-
-      SuccessResp(res, {uid});
+      service.create(data)
+        .then(uid => {
+          SuccessResp(res, {uid})
+        })
+        .catch(e => {
+          console.log("error front")
+          InternalError(res, err)
+        })
     };
   }
 
   function get() {
-    return (req, res) => {
+    return async (req, res) => {
       console.log('get front');
 
       const uid = req.params.id;
@@ -48,7 +49,7 @@ module.exports = function BuildBasicFront({ service, apiHelper }){
       }
 
       try {
-        data = service.get(uid)
+        data = await service.get(uid)
       } catch (err){
         InternalError(res, err)
       }
@@ -58,13 +59,13 @@ module.exports = function BuildBasicFront({ service, apiHelper }){
   }
 
   function search() {
-    return (req, res) => {
+    return async (req, res) => {
       console.log('search front');
       // Grab search criteria from query
       criteria = req.query;
 
       try {
-        data = service.search(criteria)
+        data = await service.search(criteria)
       } catch (err){
         InternalError(res, err)
       }
@@ -74,7 +75,7 @@ module.exports = function BuildBasicFront({ service, apiHelper }){
   };
 
   function update() {
-    return (req, res) => {
+    return async (req, res) => {
       console.log('update front');
 
       const uid = req.params.id;
@@ -84,7 +85,7 @@ module.exports = function BuildBasicFront({ service, apiHelper }){
 
       const data = req.body;
       try {
-        uid = service.update(uid, data)
+        uid = await service.update(uid, data)
       } catch (err){
         InternalError(res, err)
       }
@@ -94,7 +95,7 @@ module.exports = function BuildBasicFront({ service, apiHelper }){
   };
 
   function remove() {
-    return (req, res) => {
+    return async (req, res) => {
       console.log('delete front');
 
       const uid = req.params.id;
@@ -103,7 +104,7 @@ module.exports = function BuildBasicFront({ service, apiHelper }){
       }
 
       try {
-        uid = service.remove(uid)
+        uid = await service.remove(uid)
       } catch (err){
         InternalError(res, err)
       }

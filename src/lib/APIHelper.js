@@ -22,7 +22,7 @@ module.exports = function BuildAPIHelper(){
 
   function InternalError (res, err, errMsg='') {
     console.error("ERROR:", err)
-    return res.status(500).json({ success: false, error: "Server Error", message: errMsg})
+    return res.status(500).json({ success: false, error: `Server Error`, message: errMsg})
   }
 
   function SuccessResp (res, data, statusCode=200) {

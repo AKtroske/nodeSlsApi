@@ -1,10 +1,10 @@
-module.exports = function BuildDaoBase({pool}) {
+module.exports = function BuildDaoBase({ pool, tableName }) {
   return Object.freeze({
     create,
     update
   })
   // Inserts object into $tableName with $attribute
-  async function create({ attributes, tableName }) {
+  async function create({ attributes }) {
     var columns = []
     var keys = []
 
@@ -22,7 +22,8 @@ module.exports = function BuildDaoBase({pool}) {
       const res = await pool.query(query)
       return res.rows[0]
     } catch (err) {
-      console.log(`ERROR: DB create method: ${err.message}`)
+      console.log(`DB create method: ${err.message}`)
+      throw err
     }
   }
 
@@ -47,7 +48,7 @@ module.exports = function BuildDaoBase({pool}) {
     try {
       console.log(query);
       const res = await pool.query(query)
-      return res.rows[0]
+      return await res.rows[0]
     } catch (err) {
       console.log(`ERROR: DB update method: ${err.message}`)
     }

@@ -10,10 +10,16 @@ module.exports = function BuildBasicCrud({ repo }){
     remove
   })
 
-  function create(data) {
+  async function create(data) {
     console.log('create crud');
-    repo.create(data);
-    return uid;
+    console.log(data)
+
+    try {
+      await repo.create({ attributes : data })
+      return data.uid
+    } catch (err) {
+      throw err
+    }
   };
 
   function get(uid) {
@@ -42,4 +48,11 @@ module.exports = function BuildBasicCrud({ repo }){
     resp = { mssg : 'You removed data!', uid : uid}
     return resp
   };
+
+  function _validateUnique(fields){
+    valid = true
+    console.log('validating fields')
+    console.log(fields)
+    return valid
+  }
 }
